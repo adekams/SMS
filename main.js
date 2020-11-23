@@ -78,7 +78,7 @@ let School = {
     employStaff: function(name, age, gender, subject, yearsofexperience, qualification, contact, salary){
         totalstaff++
         let id = `kingStaff${totalstaff}`
-        name = {name, age, gender, subject, yearsofexperience, qualification, contact, id}
+        name = {name, age, gender, subject, yearsofexperience, qualification, contact, salary, id}
         School.staff.push(name)  
     },
 
@@ -156,14 +156,14 @@ School.registerStudent('Nike', 17, 'female', 'JS 2', '#50000', 'yellow')
 School.registerStudent('ike', 13, 'male', 'JS 3', '#40000', 'red')
 
 
-School.employStaff('Mike', 20, 'male', 'maths', '4', 'Bsc', '0837455929' )
-School.employStaff('John', 35, 'male', 'science', '5', 'Bsc', '0837455929' )
-School.employStaff('Bilikisu', 26, 'female', 'PHE', '6', 'Bsc', '0837455929' )
-School.employStaff('Ciara', 32, 'female', 'Biology', '5', 'Bsc', '0837455929' )
-School.employStaff('Diana', 28, 'female', 'History', '4', 'Bsc', '0837455929' )
-School.employStaff('Elisha', 23, 'male', 'Agric', '2', 'Bsc', '0837455929' )
-School.employStaff('Farouk', 20, 'male', 'Psychology', '1', 'Bsc', '0837455929' )
-School.employStaff('Glory', 25, 'female', 'maths', '4', 'Bsc', '0837455929' )
+School.employStaff('Mike', 20, 'male', 'maths', '4', 'Bsc', '0837455929', "50000")
+School.employStaff('John', 35, 'male', 'science', '5', 'Bsc', '0837455929', '50000' )
+School.employStaff('Bilikisu', 26, 'female', 'PHE', '6', 'Bsc', '0837455929', '50000' )
+School.employStaff('Ciara', 32, 'female', 'Biology', '5', 'Bsc', '0837455929', '50000' )
+School.employStaff('Diana', 28, 'female', 'History', '4', 'Bsc', '0837455929', '50000' )
+School.employStaff('Elisha', 23, 'male', 'Agric', '2', 'Bsc', '0837455929', '50000' )
+School.employStaff('Farouk', 20, 'male', 'Psychology', '1', 'Bsc', '0837455929', '50000' )
+School.employStaff('Glory', 25, 'female', 'maths', '4', 'Bsc', '0837455929', '50000' )
 
 
 
