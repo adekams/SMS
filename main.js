@@ -1,19 +1,6 @@
 totalStudents = 0
 totalStaff = 0
 
-function studentId () {
-    let studentCode = 'KC/SD/'
-    let studentId = studentCode + ++totalStudents
-
-    return studentId
-}
-
-function staffId () {
-    let staffCode = 'KC/SF/'
-    let staffId = staffCode + ++totalStaff
-
-    return staffId
-}
 
 const school = {
     students: [],
@@ -24,7 +11,8 @@ const school = {
 
     //register a student
     registerStudent: function(name, age, gender, sclass, schoolFees, feesPaid, feesBalance, id) {
-        id = studentId()
+        let studentCode = 'KC/SD/'
+        id = studentCode + ++totalStudents
 
         feesBalance = parseInt(schoolFees) - parseInt(feesPaid)
 
@@ -63,16 +51,15 @@ const school = {
         id = id.toUpperCase()
         for (let i = 0; i < this.students.length; i++) {      
             if (id === this.students[i].id){
-                delete this.students[i]
-                
+                delete this.students[i]             
             }
         }return this.students
-        
     },
 
     //employ a staff
     employStaff: function(name, age, subject, qualification, salary, id) {
-        id = staffId()
+        let staffCode = 'KC/SF/'
+        id = staffCode + ++totalStaff
         let staff = {name, age, subject, qualification, salary, id}
         this.staff.push(staff)
     },
