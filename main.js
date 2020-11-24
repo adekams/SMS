@@ -1,181 +1,176 @@
+totalStudents = 0
+totalStaff = 0
 
-// initialize all required global variables
-let totalstudent = 0
-let totalstaff = 0
-let schoolAccount = 0
+function studentId () {
+    let studentCode = 'KC/SD/'
+    let studentId = studentCode + ++totalStudents
 
-//  creating school object
-let School = {
-    name: "King's College",
-    address: " Lagos ",
-    student: [],
-    staff: [],
-
-    // all required methods for dynamic functionali
-    registerStudent: function(name, age, gender, sclass, schoolfee){
-        totalstudent++
-
-        let id = `KingsStudent${totalstudent}`
-        // create a variable and store an object containting the student information in it.
-        name = {name, age, gender, sclass, schoolfee, id}
-        // push the variable to the student array
-        School.student.push(name)  
-    },
-    
-     getAllStudents: function(){
-        return School.student
-    },
-
-    getStudentbyID: function(id){
-        for(let i = 0; i < School.student.length; i++){
-            if (id === School.student[i].id){
-                return School.student[i]
-            }
-        }   
-    },
-
-    
-    getStudentbyName: function(name){
-        for(let i = 0; i < School.student.length; i++){
-            if (name === School.student[i].name){
-                return School.student[i]
-            }
-        }
-    },
-
-
-    // sortStudents: function(arg){
-    //     School.student.sort(function(arg){
-    //         if (arg ===  School.student[i].arg){
-    //             return School.student[i]
-    //         }
-    //     })
-    // },
-    
-
-    modifyStudent: function(id, key, value){
-        for(let i = 0; i < School.student.length; i++){
-            if (id === School.student[i].id){
-                School.student[i][key] = value
-                return School.student[i] 
-            }  
-        }  
-    },
-    
-    deleteStudent: function(id){
-        for(let i = 0; i < School.student.length; i++){
-            if (id === School.student[i].id){
-                delete School.student[i]
-                return School.student 
-            }
-        }  
-    },
-
-
-    // ---------------------------------------------------------------------------------------------------------
-
-    // set up the staff employment pmethod
-    employStaff: function(name, age, gender, subject, yearsofexperience, qualification, contact, salary){
-        totalstaff++
-        let id = `kingStaff${totalstaff}`
-        name = {name, age, gender, subject, yearsofexperience, qualification, contact, salary, id}
-        School.staff.push(name)  
-    },
-
-
-    getAllStaffs: function(){
-        return School.staff
-    },
-
-    // the methods below itirates over the array and accesses the object properties using an id to carry an operation when a condition is met.
-
-    getStaffbyId: function(id){
-        for(let i = 0; i < School.staff.length; i++){
-            if (id === School.staff[i].id){
-                return School.staff[i]
-            }
-        }
-    },
-
-    
-    getStaffbyName: function(name){
-        for(let i = 0; i < School.staff.length; i++){
-            if (name === School.staff[i].name){
-                return School.staff[i]
-            }
-        }
-    },
-
-    
-    modifyStaff: function(id, key, value){
-        for(let i = 0; i < School.staff.length; i++){
-            if (id === School.staff[i].id){
-                School.staff[i][key] = value
-                return School.staff[i] 
-            }
-        }   
-    },
-
-
-    deleteStaff: function(id){
-        for(let i = 0; i < School.staff.length; i++){
-            if (id === School.staff[i].id){
-                delete School.staff[i]
-                return School.staff 
-            }
-        }   
-    },
-
-    // This method gets school accounts by adding all the school fees, and all staff salaries separately. then subtracting both from each other.
-
-    // getSchoolAccount: function(){
-    //     for (let i = 0; i < School.student.lenght; i++){
-    //         let studentsFeesRevenue =+ parseInt(School.student[i].schoolfee)    
-    //         let staffSalaryCost =+ parseInt(School.staff[i].salary)
-    //         schoolAccount = studentsFeesRevenue - staffSalaryCost    
-    //     }   return schoolAccount
-    // },  
-
-
-    // this method gets all necessaryinformation about the school
-    getSchoolInfo: function(){
-        return {"name": this.name, "address": this.address, "students": this.getAllStudents(), "staff": this.getAllStaffs(), "account": this.getSchoolAccount()}
-    },
+    return studentId
 }
 
+function staffId () {
+    let staffCode = 'KC/SF/'
+    let staffId = staffCode + ++totalStaff
 
-// ---------------------------------------------------------------------------------------------------------
+    return staffId
+}
+
+const school = {
+    students: [],
+    staff: [],
+    name: "King's College",
+    location: "Lagos",
+    
+
+    //register a student
+    registerStudent: function(name, age, gender, sclass, schoolFees, feesPaid, feesBalance, id) {
+        id = studentId()
+
+        feesBalance = parseInt(schoolFees) - parseInt(feesPaid)
+
+        let student = {name, age, gender, sclass, schoolFees, feesPaid, feesBalance, id}
+        this.students.push(student)
+    },
+
+    //log all students
+    getAllStudents: function() {
+        return this.students
+    },
+    
+    //search for a single student
+    getStudentById: function (id) {
+        id = id.toUpperCase()
+        for (let i = 0; i < this.students.length; i++) {      
+            if (id === this.students[i].id){
+                return this.students[i]
+            }          
+        }
+    },
+
+    //change the content of a student's info
+    modifyStudent: function (id, key, value) {
+        id = id.toUpperCase()
+        this.students.forEach(student => {
+            if (student.id === id) {
+                student[key] = value
+                console.log(this.students) 
+            }    
+        })
+    },
+
+    //delete a student from the students array
+    deleteStudent: function (id) {
+        id = id.toUpperCase()
+        for (let i = 0; i < this.students.length; i++) {      
+            if (id === this.students[i].id){
+                delete this.students[i]
+                
+            }
+        }return this.students
+        
+    },
+
+    //employ a staff
+    employStaff: function(name, age, subject, qualification, salary, id) {
+        id = staffId()
+        let staff = {name, age, subject, qualification, salary, id}
+        this.staff.push(staff)
+    },
+
+    //view all staff and their details
+    getAllStaff: function () {
+        return this.staff
+    },
+
+    //search for a staff with their id
+    getStaffById: function (id) {
+        id = id.toUpperCase()
+        for (let i = 0; i < this.staff.length; i++) {
+            if (id === this.staff[i].id){
+                return this.staff[i]
+            }         
+        }
+    },
+
+    //change the value of a student's key
+    modifyStaff: function (id, key, value) {
+        id = id.toUpperCase()
+        this.staff.forEach(person => {
+            if (person.id === id) {
+                person[key] = value
+                console.log(this.staff) 
+            }    
+        })
+    },
+
+    //delete a staff from the staff array
+    deleteStaff: function (index) {
+        deletedStaff =  this.staff.splice(index, 1)
+        // console.log(deletedStaff)
+        return this.staff
+    },
+
+    getSchoolAccount: function () {
+        let totalAccount = 0;
+        let studentsAccount = 0;
+        let staffAccount = 0
+
+        this.students.map(student => {
+            studentsAccount += student.feesPaid                        
+        })
+        this.staff.map(person => {
+            staffAccount += person.salary                       
+        })
+        totalAccount = studentsAccount - staffAccount
+        return(totalAccount)
+    },
+
+    //get school information
+    getSchoolInfo: function() {
+        schInfo = {name: this.name, address: this.location, students: this.students.length, studentList: this.students, staff: this.staff.length, staffList: this.staff, account: this.getSchoolAccount() }
+        return schInfo
+    }, 
+    
+       
+    
+    
+}
+
+/**/
+school.employStaff('Iyere', 42, 'Mathematics', 'B.Sc Mathematics', 300000)
+school.employStaff('Munachim', 30, 'Animal Husbandry', 'B.Sc Zoology', 300000)
+school.employStaff('Boyega', 33, 'Integrated Science', 'B.Ed Biology', 220000)
+school.employStaff('Yunus', 45, 'Physics', 'Phd Physics', 440000)
 
 
-School.registerStudent('Mike', 15, 'male', 'JS 1', '#30500', 'blue')
-School.registerStudent('Usman', 18, 'male', 'SS 1', '#22000', 'yellow')
-School.registerStudent('morenike', 17, 'female', 'JS 2', '#50000', 'green')
-School.registerStudent('Anna', 17, 'female', 'JS 2', '#50000', 'blue')
-School.registerStudent('Uche', 20, 'male', 'SS 2', '#50000', 'red')
-School.registerStudent('Nike', 17, 'female', 'JS 2', '#50000', 'yellow')
-School.registerStudent('ike', 13, 'male', 'JS 3', '#40000', 'red')
+school.registerStudent('Ace', 12, 'female', 'JSS 3', 200000, 100000)
+school.registerStudent('Liam', 8, 'male', 'JSS1', 150000, 150000)
+school.registerStudent('Efe', 12, 'male', 'SS1', 270000, 200000)
+school.registerStudent('Kachi', 18, 'female', 'SS3', 500000, 40000)
+school.registerStudent('Lilah', 13, 'female', 'JSS 3', 200000, 200000)
+school.registerStudent('Nyx', 10, 'female', 'JSS1', 150000, 127000)
+school.registerStudent('Zain', 12, 'male', 'SS1', 270000, 270000)
+school.registerStudent('Aisha', 16, 'female', 'SS3', 500000, 420000)
 
 
-School.employStaff('Mike', 20, 'male', 'maths', '4', 'Bsc', '0837455929', "50000")
-School.employStaff('John', 35, 'male', 'science', '5', 'Bsc', '0837455929', '50000' )
-School.employStaff('Bilikisu', 26, 'female', 'PHE', '6', 'Bsc', '0837455929', '50000' )
-School.employStaff('Ciara', 32, 'female', 'Biology', '5', 'Bsc', '0837455929', '50000' )
-School.employStaff('Diana', 28, 'female', 'History', '4', 'Bsc', '0837455929', '50000' )
-School.employStaff('Elisha', 23, 'male', 'Agric', '2', 'Bsc', '0837455929', '50000' )
-School.employStaff('Farouk', 20, 'male', 'Psychology', '1', 'Bsc', '0837455929', '50000' )
-School.employStaff('Glory', 25, 'female', 'maths', '4', 'Bsc', '0837455929', '50000' )
+/**/
+console.log(school.getAllStudents())
+console.log(school.getAllStaff())
+console.log(school.getStaffById('KC/SF/3'))
+console.log(school.getStudentById('KC/SD/5')) 
+console.log(school.deleteStudent('KC/SD/2'))
+console.log(school.modifyStudent('KC/SD/6', 'feesPaid', 140000))
+console.log(school.modifyStaff('KC/SF/2', 'name', 'Chiagoziem'))
+console.log(school.getSchoolAccount())
+console.log(school.getSchoolInfo())
+
+/* */
 
 
 
-console.log(School.getStudentbyID())
-console.log(School.getStudentbyName())
-console.log(School.getStudentbyName(name))
-console.log(School.deleteStudent(id))
-console.log(School.modifyStudent('KingStudent4', 'age', 20))
 
 
-console.log(School.getStaffbyID())
-console.log(School.getAllStaff())
-console.log(School.getStaffbyName(name))
-console.log(School.deleteStaff(id))
-console.log(School.modifyStaff('KingStudent4', 'age', 20))
+
+
+
+// document.querySelector('.account').innerHTML = school.name
