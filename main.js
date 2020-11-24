@@ -1,18 +1,18 @@
-totalStudents = 0
-totalStaff = 0
-
 
 const school = {
     students: [],
     staff: [],
     name: "King's College",
     location: "Lagos",
-    
+
+    totalStudents: 0,
+    totalStaff: 0,
+
 
     //register a student
     registerStudent: function(name, age, gender, sclass, schoolFees, feesPaid, feesBalance, id) {
         let studentCode = 'KC/SD/'
-        id = studentCode + ++totalStudents
+        id = studentCode + ++this.totalStudents
 
         feesBalance = parseInt(schoolFees) - parseInt(feesPaid)
 
@@ -59,7 +59,7 @@ const school = {
     //employ a staff
     employStaff: function(name, age, subject, qualification, salary, id) {
         let staffCode = 'KC/SF/'
-        id = staffCode + ++totalStaff
+        id = staffCode + ++this.totalStaff
         let staff = {name, age, subject, qualification, salary, id}
         this.staff.push(staff)
     },
